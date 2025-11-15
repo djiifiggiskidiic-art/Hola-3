@@ -1,0 +1,158 @@
+<!DOCTYPE html><html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Para Enori 💗</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffb4c7, #ffd6e8);
+            margin: 0;
+            padding: 0;
+            color: #4a1c2e;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-top: 20px;
+        }
+        button {
+            background: #ff5e88;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 10px;
+            transition: 0.2s;
+        }
+        button:hover {
+            transform: scale(1.07);
+        }.frases-box {
+        background: white;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    /* MINI JUEGO */
+    #gameBox {
+        background: #fff;
+        padding: 20px;
+        border-radius: 15px;
+        display: none;
+        margin-top: 20px;
+    }
+
+    #gameArea {
+        width: 100%;
+        height: 200px;
+        background: #ffe3ee;
+        border-radius: 12px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    #heart {
+        width: 40px;
+        height: 40px;
+        background: red;
+        clip-path: polygon(50% 0%, 61% 12%, 75% 12%, 87% 25%, 87% 37%, 75% 50%, 50% 75%, 25% 50%, 13% 37%, 13% 25%, 25% 12%, 39% 12%);
+        position: absolute;
+        cursor: pointer;
+    }
+
+    /* MODO AMOR */
+    .amor {
+        background: linear-gradient(135deg, #ff4d6d, #ffb4c7);
+        color: white;
+    }
+</style>
+
+</head>
+<body><div class="container">
+    <h1>Para Enori 💗</h1>
+    <p>Una página especial, hecha con cariño, para recordarte lo valiosa que eres.</p><button onclick="toggleMusic()">🎵 Música Romántica</button>
+<button onclick="mostrarJuego()">🎮 Mini Juego</button>
+<button onclick="nuevaFrase()">✨ Nueva Frase</button>
+<button onclick="modoAmor()">💞 Modo Amor</button>
+
+<div class="frases-box" id="frasesBox">
+    Haz clic en "Nueva Frase" para ver algo bonito ✨
+</div>
+
+<!-- MINI JUEGO -->
+<div id="gameBox">
+    <h2>Mini Juego ❤️</h2>
+    <p>Toca el corazón antes de que desaparezca!</p>
+    <div id="gameArea"></div>
+</div>
+
+</div><audio id="music" src="https://cdn.pixabay.com/audio/2022/10/25/audio_3f1a3cb286.mp3"></audio>
+
+<script>
+    const frases = [
+        "Eres más fuerte de lo que crees, Enori ✨",
+        "Todo lo que sueñas, lo puedes lograr. Yo creo en ti 💗",
+        "Tu luz no se apaga, incluso en tus días difíciles.",
+        "Personas como tú hacen que el mundo se sienta más bonito.",
+        "Vales más de lo que imaginas, nunca dudes de eso.",
+        "Mereces amor, calma y cosas buenas todos los días.",
+        "Si alguna vez caes, recuerda: también sabes volar 🕊️",
+        "Tu corazón es de los más lindos que existen 💞"
+    ];
+
+    function nuevaFrase() {
+        const random = frases[Math.floor(Math.random() * frases.length)];
+        document.getElementById("frasesBox").innerText = random;
+    }
+
+    function toggleMusic() {
+        const music = document.getElementById("music");
+        if (music.paused) music.play(); else music.pause();
+    }
+
+    function modoAmor() {
+        document.body.classList.toggle("amor");
+    }
+
+    // MINI JUEGO
+    function mostrarJuego() {
+        const box = document.getElementById("gameBox");
+        box.style.display = box.style.display === "none" ? "block" : "none";
+        iniciarJuego();
+    }
+
+    function iniciarJuego() {
+        const area = document.getElementById("gameArea");
+        area.innerHTML = "";
+        const heart = document.createElement("div");
+        heart.id = "heart";
+        area.appendChild(heart);
+
+        moverHeart();
+
+        heart.onclick = () => {
+            alert("¡Ganaste! 💗");
+            moverHeart();
+        };
+    }
+
+    function moverHeart() {
+        const heart = document.getElementById("heart");
+        const area = document.getElementById("gameArea");
+        const maxX = area.clientWidth - 40;
+        const maxY = area.clientHeight - 40;
+
+        heart.style.left = Math.random() * maxX + "px";
+        heart.style.top = Math.random() * maxY + "px";
+    }
+</script></body>
+</html>
